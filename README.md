@@ -9,3 +9,4 @@ Authors:
 - Haczar Criollo
 - Matthew Kress
 - Edward Gonzelz
+- Elias Garcia
