@@ -12,3 +12,4 @@ Authors:
 - Rafael Leal
 - Edward Gonzalez
 - Elias Garcia
+- Ciana Rogers
