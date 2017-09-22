@@ -6,6 +6,7 @@ Our mission is to create A virtual workspace where students can collaborate and 
 We will be using Unity 2017.1.1f1 so make sure you use the same version!
 
 Authors:
+
 Haczar Criollo
 
 Matthew Kress
