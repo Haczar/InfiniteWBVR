@@ -9,4 +9,6 @@ Authors:
 - Haczar Criollo
 - Matthew Kress
 - Carlos Debasa
-
+- Rafael Leal
+- Edward Gonzalez
+- Elias Garcia
