@@ -13,3 +13,4 @@ Authors:
 - Edward Gonzalez
 - Elias Garcia
 - Ciana Rogers
+- Andres Salinas
