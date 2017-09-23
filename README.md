@@ -9,8 +9,8 @@ Authors:
 - Haczar Criollo
 - Matthew Kress
 - Carlos Debasa
-- Rafael Leal
 - Edward Gonzalez
 - Elias Garcia
 - Ciana Rogers
 - Andres Salinas
+- Rafael Leal
