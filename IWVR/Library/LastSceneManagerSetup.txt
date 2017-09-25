@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/SteamVR/InteractionSystem/Samples/Scenes/Interactions_Example.unity
+- path: Assets/IWVR/Locomotion/LocoTest.unity
   isLoaded: 1
   isActive: 1
