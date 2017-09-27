@@ -14,3 +14,4 @@ Authors:
 - Ciana Rogers
 - Andres Salinas
 - Rafael Leal
+- Matthew Garcia
