@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BoardManipulation : MonoBehaviour
 {
+    void moveBoard(Vector3 translation)
+    {
+        Board.gameObject.transform.position += translation;
+    }
+
 
 	// Use this for initialization
 	void Start ()
@@ -17,5 +22,5 @@ public class BoardManipulation : MonoBehaviour
 		
 	}
 
-    public int something;
+    public GameObject Board;
 }
