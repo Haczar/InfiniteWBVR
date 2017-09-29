@@ -23,6 +23,12 @@ GameObject:
   - component: {fileID: 65224015571254682}
   - component: {fileID: 23789988468406130}
   - component: {fileID: 114798916735665106}
+  - component: {fileID: 65009282734353702}
+  - component: {fileID: 65638043870607372}
+  - component: {fileID: 65468105332182588}
+  - component: {fileID: 65608817050655514}
+  - component: {fileID: 65543602496726924}
+  - component: {fileID: 114781907722082086}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -82,6 +88,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763984643626024}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65009282734353702
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763984643626024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2, z: 1}
+  m_Center: {x: 0, y: -0.4, z: 0}
 --- !u!65 &65224015571254682
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -94,6 +112,74 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65468105332182588
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763984643626024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 1, z: 1}
+  m_Center: {x: -0.425, y: 0, z: 0}
+--- !u!65 &65543602496726924
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763984643626024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.5}
+--- !u!65 &65608817050655514
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763984643626024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 1, z: 1}
+  m_Center: {x: 0.425, y: 0, z: 0}
+--- !u!65 &65638043870607372
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763984643626024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.2, z: 1}
+  m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &114781907722082086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763984643626024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0135c95e70592e4fac2f29e7b78abcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locked: 0
+  markerActive: 1
+  teleportType: 1
+  title: Board
+  switchToScene: 
+  titleVisibleColor: {r: 1, g: 0.9310343, b: 0, a: 0}
+  titleHighlightedColor: {r: 0.07586192, g: 1, b: 0, a: 0}
+  titleLockedColor: {r: 1, g: 0, b: 0, a: 0}
+  playerSpawnPoint: 0
 --- !u!114 &114798916735665106
 MonoBehaviour:
   m_ObjectHideFlags: 1

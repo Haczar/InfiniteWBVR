@@ -32,7 +32,9 @@ public class LineDraw : MonoBehaviour
 
             numCLicks = 0;
         }
-        else if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
+        else if (  device.GetTouch(SteamVR_Controller.ButtonMask.Trigger)
+                && trackedObj.transform.position.x <= board.transform.position.x 
+                && trackedObj.transform.position.y <= board.transform.position.y)
         {
             currentLine.positionCount = numCLicks + 1;
 

@@ -87,7 +87,7 @@ public class PanningLoco : MonoBehaviour
 
 
     //Private
-    private int counter;
+    private uint counter;
 
     private float velocity;
 
