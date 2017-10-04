@@ -1,26 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
-public class BoardManipulation : MonoBehaviour
+namespace IWVR
 {
-    void moveBoard(Vector3 translation)
+    public class BoardManipulation : MonoBehaviour
     {
-        Board.gameObject.transform.position += translation;
+        void moveBoard(Vector3 translation)
+        { Board.gameObject.transform.position += translation; }
+
+        void dockBoard()
+        {
+            //Needs to do an event for the activation of the docked state in user states.
+
+            UserState.StateChangeEvent stuff;   //Will be passed to the triggered event....
+
+            stuff.board = Board;
+
+            stuff.leftController  = GameObject.FindGameObjectWithTag("L_Controller");
+            stuff.rightController = this.gameObject                                 ;
+
+            stuff.position        = this.gameObject.GetComponentInParent<Transform>().position;
+
+            this.gameObject.GetComponentInParent<UserState>().OnDockedStateActivated(stuff);   //Do not feel right about doing it this way....
+        }
+
+        // Use this for initialization
+        void Start()
+        {
+            hoverHighlight = this.gameObject.AddComponent<ControllerHoverHighlight>();   //Was supposed to be for highlighting the whiteboards for interaction... Most likely not the right setup for it.
+
+            hoverHighlight.fireHapticsOnHightlight = true;
+
+            hoverHighlight.highLightMaterial = Resources.Load("HoverHighlight", typeof(Material)) as Material;
+
+            hoverHighlight.highLightMaterial = Resources.Load<Material>("SteamVR/InteractionSystem/Materials/HoverHighlight");
+
+            Debug.Log("HoverHighlight: " + hoverHighlight.isActiveAndEnabled);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public GameObject Board;
+
+        private ControllerHoverHighlight hoverHighlight;
     }
-
-
-	// Use this for initialization
-	void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
-    public GameObject Board;
 }
+

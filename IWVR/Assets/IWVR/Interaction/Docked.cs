@@ -6,6 +6,15 @@ namespace IWVR
 {
     public class Docked : MonoBehaviour
     {
+        public void giveDockedBoard(GameObject dockedBoard)
+        {
+            this.dockedBoard = dockedBoard;
+        }
+
+        public void clean()  //Destory's state related componenets
+        {
+            Destroy(this.gameObject.GetComponent<Docked>());
+        }
 
         // Use this for initialization
         void Start()

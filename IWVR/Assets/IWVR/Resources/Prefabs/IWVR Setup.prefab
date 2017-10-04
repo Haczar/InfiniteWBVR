@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114901166345456684}
   m_Layer: 0
   m_Name: Controller (right)
-  m_TagString: Untagged
+  m_TagString: R_Controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,10 +86,9 @@ GameObject:
   - component: {fileID: 4061836155773846}
   - component: {fileID: 114916929503336618}
   - component: {fileID: 114051356225041498}
-  - component: {fileID: 114869721932067874}
   m_Layer: 0
   m_Name: Controller (left)
-  m_TagString: Untagged
+  m_TagString: L_Controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,6 +549,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userState: 0
+  locoController: 0
+  interactController: 1
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
 --- !u!114 &114727388533871448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -622,19 +625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vrcam: {fileID: 0}
---- !u!114 &114869721932067874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1321808243594874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3b87dcf853c4e49a15adf46fab30aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportOnClick: 0
-  teleportType: 2
 --- !u!114 &114870762055652348
 MonoBehaviour:
   m_ObjectHideFlags: 1
