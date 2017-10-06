@@ -28,7 +28,6 @@ public class SteamVR_TeleporterModified : MonoBehaviour
     void Start()
     {
         var trackedController = GetComponent<SteamVR_TrackedController>();
-
         if (trackedController == null)
         {
             trackedController = gameObject.AddComponent<SteamVR_TrackedController>();

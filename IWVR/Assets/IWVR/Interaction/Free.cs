@@ -6,6 +6,7 @@ namespace IWVR
 {
     public class Free : MonoBehaviour
     {
+<<<<<<< HEAD
         //Setup
         public void giveControllers(GameObject leftController, GameObject rightController)
         {
@@ -24,6 +25,12 @@ namespace IWVR
         void Start()
         {
             righthand.AddComponent<BoardManipulation>();
+=======
+        // Use this for initialization
+        void Start()
+        {
+            Debug.Log("Free State Activated");
+>>>>>>> parent of 307aea1... More Work on states and interaction components.
         }
 
         // Update is called once per frame
@@ -31,8 +38,11 @@ namespace IWVR
         {
 
         }
+<<<<<<< HEAD
 
         private GameObject leftHand ;
         private GameObject righthand;
+=======
+>>>>>>> parent of 307aea1... More Work on states and interaction components.
     }
 }

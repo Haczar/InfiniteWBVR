@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
-namespace IWVR
+public class BoardManipulation : MonoBehaviour
 {
-    public class BoardManipulation : MonoBehaviour
+    void moveBoard(Vector3 translation)
     {
+<<<<<<< HEAD
         void moveBoard(Vector3 translation)
         { Board.gameObject.transform.position += translation; }
 
@@ -48,10 +48,23 @@ namespace IWVR
                 dockBoard();
             }
         }
-
-        public GameObject Board;
-
-        private ControllerHoverHighlight hoverHighlight;
+=======
+        Board.gameObject.transform.position += translation;
     }
-}
 
+>>>>>>> parent of 307aea1... More Work on states and interaction components.
+
+	// Use this for initialization
+	void Start ()
+    {
+		
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+		
+	}
+
+    public GameObject Board;
+}

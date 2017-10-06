@@ -6,6 +6,7 @@ namespace IWVR
 {
     public class Docked : MonoBehaviour
     {
+<<<<<<< HEAD
         public void giveStuff(GameObject dockedBoard, GameObject leftController, GameObject rightController)
         {
             this.dockedBoard = dockedBoard;
@@ -18,6 +19,8 @@ namespace IWVR
         {
             Destroy(this.gameObject.GetComponent<Docked>());
         }
+=======
+>>>>>>> parent of 307aea1... More Work on states and interaction components.
 
         // Use this for initialization
         void Start()
