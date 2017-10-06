@@ -38,7 +38,7 @@ namespace IWVR
             if      (userState == states.free    ) { this.gameObject.GetComponent<Free    >().clean(); }
             else if (userState == states.overview) { this.gameObject.GetComponent<Overview>().clean(); }
 
-            this.gameObject.AddComponent<Docked>().giveDockedBoard(args.board);
+            this.gameObject.AddComponent<Docked>().giveStuff(args.board, args.leftController, args.rightController);
 
             userState = states.docked;
         }
@@ -112,6 +112,7 @@ namespace IWVR
         // Update is called once per frame
         void Update()
         {
+
         }
 
         public enum states

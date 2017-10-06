@@ -43,7 +43,10 @@ namespace IWVR
         // Update is called once per frame
         void Update()
         {
-
+            if (this.gameObject.GetComponent<SteamVR_TrackedController>().gripped)
+            {
+                dockBoard();
+            }
         }
 
         public GameObject Board;

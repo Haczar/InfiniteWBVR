@@ -6,9 +6,12 @@ namespace IWVR
 {
     public class Docked : MonoBehaviour
     {
-        public void giveDockedBoard(GameObject dockedBoard)
+        public void giveStuff(GameObject dockedBoard, GameObject leftController, GameObject rightController)
         {
             this.dockedBoard = dockedBoard;
+
+            this.leftController = leftController;
+            this.rightController = rightController;
         }
 
         public void clean()  //Destory's state related componenets
@@ -19,16 +22,33 @@ namespace IWVR
         // Use this for initialization
         void Start()
         {
-
+            leftController.AddComponent<PanningLoco>().active = true;
+            rightController.AddComponent<LineDraw>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (leftController.GetComponent<SteamVR_TrackedController>().gripped)
+            {
+                UserState.StateChangeEvent stuff;
 
+                stuff.board = dockedBoard;
+
+                stuff.leftController = leftController;
+                stuff.rightController = rightController;
+
+                stuff.position = position;
+
+                this.gameObject.GetComponentInParent<UserState>().OnFreeStateActivated(stuff);
+            }
         }
 
         private GameObject dockedBoard;
+
+        private GameObject leftController;
+        private GameObject rightController;
+
+        private Vector3 position;
     }
 }
-
