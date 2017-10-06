@@ -35,8 +35,8 @@ namespace IWVR
 
                 stuff.board = dockedBoard;
 
-                stuff.leftController = leftController;
-                stuff.rightController = rightController;
+                stuff.leftHand  = leftController;
+                stuff.rightHand = rightController;
 
                 stuff.position = position;
 
