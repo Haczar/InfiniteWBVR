@@ -9,8 +9,8 @@ namespace IWVR
         // Use this for initialization
         void Start()
         {
-            FreeStateActive     += setFreeState;
-            DockedStateActive   += setDockedState;
+            FreeStateActive += setFreeState;
+            DockedStateActive += setDockedState;
             OverviewStateActive += setOverviewState;
 
             StateChangeEvent stuff;

@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
-public class BoardManipulation : MonoBehaviour
+namespace IWVR
 {
-    void moveBoard(Vector3 translation)
+    public class BoardManipulation : MonoBehaviour
     {
-<<<<<<< HEAD
         void moveBoard(Vector3 translation)
         { Board.gameObject.transform.position += translation; }
 
@@ -43,28 +43,11 @@ public class BoardManipulation : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-            if (this.gameObject.GetComponent<SteamVR_TrackedController>().gripped)
-            {
-                dockBoard();
-            }
+
         }
-=======
-        Board.gameObject.transform.position += translation;
+
+        public GameObject Board;
+
+        private ControllerHoverHighlight hoverHighlight;
     }
-
->>>>>>> parent of 307aea1... More Work on states and interaction components.
-
-	// Use this for initialization
-	void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
-    public GameObject Board;
 }

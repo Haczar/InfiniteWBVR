@@ -25,7 +25,7 @@ namespace IWVR
 
         void setFreeState(object sender, StateChangeEvent args)
         {
-            if      (userState == states.docked  ) { this.gameObject.GetComponent<Docked  >().clean(); }
+            if (userState == states.docked) { this.gameObject.GetComponent<Docked>().clean(); }
             else if (userState == states.overview) { this.gameObject.GetComponent<Overview>().clean(); }
 
             this.gameObject.AddComponent<Free>().giveControllers(args.leftHand, args.rightHand);

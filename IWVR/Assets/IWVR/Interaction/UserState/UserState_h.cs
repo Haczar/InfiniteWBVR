@@ -8,8 +8,8 @@ namespace IWVR
     {
         public enum states
         {
-            free    ,
-            docked  ,
+            free,
+            docked,
             overview,
         }
 
@@ -20,10 +20,10 @@ namespace IWVR
 
         public states userState;
 
-        public HandController locoController     = HandController.left ;
+        public HandController locoController = HandController.left;
         public HandController interactController = HandController.right;
 
-        public GameObject leftHand ;
+        public GameObject leftHand;
         public GameObject rightHand;
         public GameObject fallbackHand;
     }
