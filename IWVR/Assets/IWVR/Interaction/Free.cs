@@ -38,4 +38,3 @@ namespace IWVR
         private GameObject rightController;
     }
 }
-

@@ -18,8 +18,8 @@ namespace IWVR
 
             stuff.board = Board;
 
-            stuff.leftController  = GameObject.FindGameObjectWithTag("L_Controller");
-            stuff.rightController = this.gameObject                                 ;
+            stuff.leftHand  = GameObject.FindGameObjectWithTag("L_Controller");
+            stuff.rightHand = this.gameObject                                 ;
 
             stuff.position        = this.gameObject.GetComponentInParent<Transform>().position;
 
@@ -51,4 +51,3 @@ namespace IWVR
         private ControllerHoverHighlight hoverHighlight;
     }
 }
-
