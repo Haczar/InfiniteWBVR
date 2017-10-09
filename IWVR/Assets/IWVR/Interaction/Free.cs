@@ -7,25 +7,21 @@ namespace IWVR
     public class Free : MonoBehaviour
     {
         //Setup
-        public void giveControllers(GameObject leftController, GameObject rightController)
+        public void giveStuff(UserState.PlayerStuff stuff)
         {
-            this.leftController  = leftController ;
-            this.rightController = rightController;
+            this.stuff = stuff;
         }
 
         public void clean()  //Destory's state related componenets
         {
-            Destroy(leftController .GetComponent<SteamVR_TeleporterModified>());
-            Destroy(rightController.GetComponent<BoardManipulation         >());
+            Destroy(stuff.rightHand.GetComponent<BoardManipulation         >());
             Destroy(this.gameObject.GetComponent<Free                      >());
         }
 
         // Use this for initialization
         void Start()
         {
-            leftController.AddComponent<SteamVR_TeleporterModified>().teleportOnClick = true;
-
-            rightController.AddComponent<BoardManipulation>();
+            stuff.rightHand.AddComponent<BoardManipulation>();
         }
 
         // Update is called once per frame
@@ -34,7 +30,6 @@ namespace IWVR
 
         }
 
-        private GameObject leftController ;
-        private GameObject rightController;
+        UserState.PlayerStuff stuff;
     }
 }

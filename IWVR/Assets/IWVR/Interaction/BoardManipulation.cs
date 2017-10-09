@@ -14,30 +14,31 @@ namespace IWVR
         {
             //Needs to do an event for the activation of the docked state in user states.
 
-            UserState.StateChangeEvent stuff;   //Will be passed to the triggered event....
-
-            stuff.board = Board;
+            UserState.PlayerStuff stuff = new UserState.PlayerStuff();   //Will be passed to the triggered event....
 
             stuff.leftHand  = GameObject.FindGameObjectWithTag("L_Controller");
             stuff.rightHand = this.gameObject                                 ;
 
-            stuff.position        = this.gameObject.GetComponentInParent<Transform>().position;
-
-            this.gameObject.GetComponentInParent<UserState>().OnDockedStateActivated(stuff);   //Do not feel right about doing it this way....
+            //this.gameObject.GetComponentInParent<UserState>().OnDockedStateActivated(stuff);   //Do not feel right about doing it this way....
         }
 
         // Use this for initialization
         void Start()
         {
-            hoverHighlight = this.gameObject.AddComponent<ControllerHoverHighlight>();   //Was supposed to be for highlighting the whiteboards for interaction... Most likely not the right setup for it.
+            //hoverHighlight = this.gameObject.AddComponent<ControllerHoverHighlight>();   //Was supposed to be for highlighting the whiteboards for interaction... Most likely not the right setup for it.
 
-            hoverHighlight.fireHapticsOnHightlight = true;
+            //hoverHighlight.fireHapticsOnHightlight = true;
 
-            hoverHighlight.highLightMaterial = Resources.Load("HoverHighlight", typeof(Material)) as Material;
+            //hoverHighlight.highLightMaterial = Resources.Load("HoverHighlight", typeof(Material)) as Material;
 
-            hoverHighlight.highLightMaterial = Resources.Load<Material>("SteamVR/InteractionSystem/Materials/HoverHighlight");
+            //hoverHighlight.highLightMaterial = Resources.Load<Material>("SteamVR/InteractionSystem/Materials/HoverHighlight");
 
-            Debug.Log("HoverHighlight: " + hoverHighlight.isActiveAndEnabled);
+            //Debug.Log("HoverHighlight: " + hoverHighlight.isActiveAndEnabled);
+
+
+            //User interaction system highlight here:
+
+
         }
 
         // Update is called once per frame

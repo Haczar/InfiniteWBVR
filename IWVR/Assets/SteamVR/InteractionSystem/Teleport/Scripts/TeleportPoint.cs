@@ -17,7 +17,7 @@ namespace Valve.VR.InteractionSystem
 	{
 		public enum TeleportPointType
 		{
-			MoveToLocation,
+            MoveToLocation,
 			SwitchToNewScene
 		};
 

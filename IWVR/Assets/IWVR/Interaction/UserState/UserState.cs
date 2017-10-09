@@ -9,27 +9,22 @@ namespace IWVR
         // Use this for initialization
         void Start()
         {
-            FreeStateActive += setFreeState;
-            DockedStateActive += setDockedState;
-            OverviewStateActive += setOverviewState;
-
-            StateChangeEvent stuff;
-
             //---------------------------------------------------------Stuff Parameters
-            stuff.board = null;
-
-            stuff.leftHand = leftHand;
+            stuff.leftHand  = leftHand ;
             stuff.rightHand = rightHand;
-
-            stuff.position = this.gameObject.GetComponentInParent<Transform>().position;
             //-------------------------------------------------------------------------
 
-            OnFreeStateActivated(stuff);
+            GeneralEvent += startup;
+
+            OnGeneralEvent(stuff);
+
+            GeneralEvent -= startup;
         }
 
         // Update is called once per frame
         void Update()
         {
+            updateStuff();
         }
     }
 }

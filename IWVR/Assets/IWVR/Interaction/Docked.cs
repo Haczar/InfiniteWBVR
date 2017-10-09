@@ -31,16 +31,12 @@ namespace IWVR
         {
             if (leftController.GetComponent<SteamVR_TrackedController>().gripped)
             {
-                UserState.StateChangeEvent stuff;
-
-                stuff.board = dockedBoard;
+                UserState.PlayerStuff stuff;
 
                 stuff.leftHand = leftController;
                 stuff.rightHand = rightController;
 
-                stuff.position = position;
-
-                this.gameObject.GetComponentInParent<UserState>().OnFreeStateActivated(stuff);
+                //this.gameObject.GetComponentInParent<UserState>().OnFreeStateActivated(stuff);
             }
         }
 
