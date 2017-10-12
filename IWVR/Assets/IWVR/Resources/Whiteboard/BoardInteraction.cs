@@ -20,6 +20,18 @@ namespace Valve.VR.InteractionSystem
 
         private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & (~Hand.AttachmentFlags.SnapOnAttach) & (~Hand.AttachmentFlags.DetachOthers);
 
+
+        //Private
+        private int numCLicks = 0;
+
+        private GameObject line;
+
+        private LineRenderer currentLine;
+
+        public float width = 0.05f;
+
+        public Color color = Color.black;
+
         //-------------------------------------------------
         void Awake()
         {
@@ -79,6 +91,29 @@ namespace Valve.VR.InteractionSystem
         }
 
 
+        private void OnMarkerHoverBegin(MarkerTip marker)
+        {
+            line = new GameObject();
+
+            currentLine = line.AddComponent<LineRenderer>();
+
+            currentLine.startWidth = width;
+            currentLine.endWidth = width;
+
+            currentLine.startColor = Color.grey;
+            currentLine.endColor = Color.grey;
+
+            currentLine.positionCount = numCLicks + 1;
+
+            currentLine.SetPosition(numCLicks, new Vector3(marker.transform.position.x, marker.transform.position.y, this.transform.position.z - 0.01f));
+
+            numCLicks++;
+        }
+
+        private void OnMarkerHoverUpdate(MarkerTip marker)
+        {
+
+        }
         //-------------------------------------------------
         // Called when this GameObject becomes attached to the hand
         //-------------------------------------------------

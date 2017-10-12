@@ -54,7 +54,7 @@ public class MarkerTip : MonoBehaviour {
                 if (_hoveringInteractable != null)
                 {
                     //_hoveringInteractable.SendMessage("OnHandHoverEnd", this, SendMessageOptions.DontRequireReceiver);
-                    _hoveringInteractable.SendMessage("OnMarkerHoverEnd", _hoveringInteractable, SendMessageOptions.DontRequireReceiver);
+                    _hoveringInteractable.SendMessage("OnMarkerHoverEnd", this, SendMessageOptions.DontRequireReceiver);
 
                 }
 
@@ -63,7 +63,7 @@ public class MarkerTip : MonoBehaviour {
                 if (_hoveringInteractable != null)
                 {
                     //_hoveringInteractable.SendMessage("OnHandHoverBegin", this, SendMessageOptions.DontRequireReceiver);
-                    _hoveringInteractable.SendMessage("OnMarkerHoverBegin", _hoveringInteractable, SendMessageOptions.DontRequireReceiver);
+                    _hoveringInteractable.SendMessage("OnMarkerHoverBegin", this, SendMessageOptions.DontRequireReceiver);
 
                 }
             }

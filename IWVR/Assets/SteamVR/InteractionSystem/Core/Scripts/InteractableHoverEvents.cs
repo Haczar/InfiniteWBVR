@@ -19,19 +19,6 @@ namespace Valve.VR.InteractionSystem
 		public UnityEvent onAttachedToHand;
 		public UnityEvent onDetachedFromHand;
 
-        public UnityEvent onMarkerHoverBegin;
-        public UnityEvent onMarkerHoverEnd;
-
-        private void OnMarkerHoverBegin()
-        {
-            onMarkerHoverBegin.Invoke();
-        }
-
-        private void OnMarkerHoverEnd()
-        {
-            onMarkerHoverEnd.Invoke();
-        }
-
 		//-------------------------------------------------
 		private void OnHandHoverBegin()
 		{
