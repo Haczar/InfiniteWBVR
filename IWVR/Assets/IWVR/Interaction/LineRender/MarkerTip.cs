@@ -1,45 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine               ;
 using Valve.VR.InteractionSystem;
 
-public class MarkerTip : MonoBehaviour {
-
-    public Transform hoverSphereTransform;
-    public float hoverSphereRadius = 0.05f;
-    public LayerMask hoverLayerMask = -1;
-    public float hoverUpdateInterval = 0.1f;
-
-    public bool hoverLocked { get; private set; }
-
-    private Interactable _hoveringInteractable;
-
-    private int prevOverlappingColliders = 0;
-
-    private const int ColliderArraySize = 16;
-    private Collider[] overlappingColliders;
-
-    private Player playerInstance;
-
+public class MarkerTip : MonoBehaviour
+{
     private void Awake()
+    { if (hoverSphereTransform == null) { hoverSphereTransform = this.transform; } }
+
+
+    void Start ()
     {
-        if (hoverSphereTransform == null)
-        {
-            hoverSphereTransform = this.transform;
-        }
-    }
-    // Use this for initialization
-    void Start () {
         playerInstance = Player.instance;
-        // allocate array for colliders
-        overlappingColliders = new Collider[ColliderArraySize];
+
+        overlappingColliders = new Collider[ColliderArraySize];   //Allocate array for colliders
+
         hoverLocked = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        UpdateHovering();
-	}
+	void Update () { UpdateHovering(); }
 
     //-------------------------------------------------
     // The Interactable object this Hand is currently hovering over
@@ -55,7 +33,6 @@ public class MarkerTip : MonoBehaviour {
                 {
                     //_hoveringInteractable.SendMessage("OnHandHoverEnd", this, SendMessageOptions.DontRequireReceiver);
                     _hoveringInteractable.SendMessage("OnMarkerHoverEnd", this, SendMessageOptions.DontRequireReceiver);
-
                 }
 
                 _hoveringInteractable = value;
@@ -72,15 +49,15 @@ public class MarkerTip : MonoBehaviour {
 
     private void UpdateHovering()
     {
-
         if (hoverLocked)
             return;
 
         float closestDistance = float.MaxValue;
+
         Interactable closestInteractable = null;
 
         // Pick the closest hovering
-        float flHoverRadiusScale = playerInstance.transform.lossyScale.x;
+        float flHoverRadiusScale   = playerInstance.transform.lossyScale.x * 2.5f;
         float flScaledSphereRadius = hoverSphereRadius * flHoverRadiusScale;
 
         // if we're close to the floor, increase the radius to make things easier to pick up
@@ -89,20 +66,14 @@ public class MarkerTip : MonoBehaviour {
 
         // null out old vals
         for (int i = 0; i < overlappingColliders.Length; ++i)
-        {
             overlappingColliders[i] = null;
-        }
 
-        Physics.OverlapBoxNonAlloc(
-            hoverSphereTransform.position - new Vector3(0, flScaledSphereRadius * boxMult - flScaledSphereRadius, 0),
-            new Vector3(flScaledSphereRadius, flScaledSphereRadius * boxMult * 2.0f, flScaledSphereRadius),
-            overlappingColliders,
-            Quaternion.identity,
-            hoverLayerMask.value
-        );
+        Physics.OverlapSphereNonAlloc(hoverSphereTransform.position - new Vector3(0, flScaledSphereRadius * boxMult - flScaledSphereRadius, 0),
+                                      flScaledSphereRadius                                                                                    ,
+                                      overlappingColliders                                                                                    ,
+                                      hoverLayerMask.value                                                                                     );
 
-        // DebugVar
-        int iActualColliderCount = 0;
+        int iActualColliderCount = 0; // DebugVar
 
         foreach (Collider collider in overlappingColliders)
         {
@@ -111,27 +82,24 @@ public class MarkerTip : MonoBehaviour {
 
             Interactable contacting = collider.GetComponentInParent<Interactable>();
 
-            // Yeah, it's null, skip
-            if (contacting == null)
+            if (contacting == null)   // Yeah, it's null, skip
                 continue;
 
-            // Ignore this collider for hovering
-            IgnoreHovering ignore = collider.GetComponent<IgnoreHovering>();
+            
+            IgnoreHovering ignore = collider.GetComponent<IgnoreHovering>();   // Ignore this collider for hovering
             if (ignore != null)
-            {
                 if (ignore.onlyIgnoreHand == null || ignore.onlyIgnoreHand == this)
-                {
                     continue;
-                }
-            }
 
             // Best candidate so far...
             float distance = Vector3.Distance(contacting.transform.position, hoverSphereTransform.position);
-            if (distance < closestDistance)
+
+            if (distance < closestDistance && !collider.Equals(this.GetComponentInParent<CapsuleCollider>()))
             {
-                closestDistance = distance;
+                closestDistance     = distance  ;
                 closestInteractable = contacting;
             }
+
             iActualColliderCount++;
         }
 
@@ -139,8 +107,28 @@ public class MarkerTip : MonoBehaviour {
         hoveringInteractable = closestInteractable;
 
         if (iActualColliderCount > 0 && iActualColliderCount != prevOverlappingColliders)
-        {
             prevOverlappingColliders = iActualColliderCount;
-        }
     }
+
+
+    //Public
+    public bool hoverLocked { get; private set; }
+
+    public float hoverSphereRadius   = 0.05f;
+    public float hoverUpdateInterval = 0.1f ;
+
+    public LayerMask hoverLayerMask = -1;
+
+    public Transform hoverSphereTransform;
+
+    //Private
+    private int prevOverlappingColliders = 0;
+
+    private const int ColliderArraySize = 16;
+
+    private Collider[] overlappingColliders;
+
+    private Interactable _hoveringInteractable;
+
+    private Player playerInstance;
 }

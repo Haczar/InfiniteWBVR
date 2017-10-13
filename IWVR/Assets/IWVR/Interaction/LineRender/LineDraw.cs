@@ -1,64 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine               ;
+using Valve.VR.InteractionSystem;
 
 
-public class LineDraw : MonoBehaviour
+public class LineDraw : MonoBehaviour   //The classic way of doing line draw.
 {
-	// Use this for initialization
-	void Start ()
+    private void Start()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        device = SteamVR_Controller.Input((int)trackedObj.index);
+        lineRenObj = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/IWVR/Interaction/LineRenderObj.prefab");
+    }
 
-        if (device.GetTouchDown (SteamVR_Controller.ButtonMask.Trigger))
+    void Update()
+    {
+        device = SteamVR_Controller.Input((int)hand.controller.index);
+
+        if (device.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))   //Checks to see if trigger has been pressed down.
         {
-            line = new GameObject();
+            lineNum++; line = new GameObject(lineName + lineNum.ToString());//Increments the lineNum value and then creates a new line object with the lineName and lineNum to gen name.
 
-            currentLine = line.AddComponent<LineRenderer>();
+            line.transform.SetParent(gameObject.transform.Find("LineDump").transform);
+
+            currentLine = line.gameObject.AddComponent<LineRenderer>();
 
             currentLine.startWidth = width;
-            currentLine.endWidth   = width;
+            currentLine.endWidth = width;
 
-            currentLine.startColor = Color.grey;
-            currentLine.endColor   = Color.grey;
+            currentLine.material = (Material)Resources.Load("Materials/Marker/markerDefault.mat");
 
-            //line = (GameObject)Instantiate(Resources.Load("Assets\\IWVR\\Interaction\\LineRender\\LineRenderObj.prefab"));
+            currentLine.startColor = color;
+            currentLine.endColor = color;
 
-            numCLicks = 0;
+            index = 0;
         }
-        else if (  device.GetTouch(SteamVR_Controller.ButtonMask.Trigger)
-                && trackedObj.transform.position.x <= board.transform.position.x 
-                && trackedObj.transform.position.y <= board.transform.position.y)
+        else if (  device.GetTouch(SteamVR_Controller.ButtonMask.Trigger)   //Checks to see if hand is within bounds, and trigger is still held down.
+                && hand.transform.position.x <=  board.transform.localScale.x / 2 + board.transform.position.x
+                && hand.transform.position.x >= -board.transform.localScale.x / 2 + board.transform.position.x
+                && hand.transform.position.y <=  board.transform.localScale.y / 2 + board.transform.position.y
+                && hand.transform.position.y >= -board.transform.localScale.y / 2 + board.transform.position.y)
         {
-            currentLine.positionCount = numCLicks + 1;
+            currentLine.positionCount = index + 1;
 
-            currentLine.SetPosition(numCLicks, new Vector3(trackedObj.transform.position.x, trackedObj.transform.position.y, board.transform.position.z-0.01f));
+            currentLine.SetPosition(index, new Vector3(hand.transform.position.x, hand.transform.position.y, board.transform.position.z - 0.01f));
 
-            numCLicks++;
+            index++;
         }
-	}
+    }
 
     //Public
-    public float width = 0.05f;
+    public float width = 0.014f;   //Width of the line
 
-    public Color color = Color.black;
+    public Color color = Color.black;   //Color of the line.
 
-    public SteamVR_TrackedObject trackedObj;
+    public GameObject board;   //Board object to be used.
 
-    public GameObject board;
+    public Hand hand;   //Hand that will create lines.
 
     //Private
-    private int   numCLicks = 0;
+    private int index   = 0;   //Used for updating the line array index.
+    private int lineNum = 0;   //Line Naming scheme numeral.
 
-    private GameObject line;
+    private string lineName = "Line ";  //Part of Line Naming scheme.
 
-    private LineRenderer currentLine;
+    private GameObject line;   //Vector Line the line to be created.
 
-    private SteamVR_Controller.Device device;
+    private LineRenderer currentLine;   //The current Line to be used within one update interval.
+
+    private GameObject lineRenObj;
+
+    private SteamVR_Controller.Device device;   //Used to get the input from the steamVR controller that was attached to the hand object.
 }

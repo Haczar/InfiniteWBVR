@@ -10,7 +10,6 @@ public class PanningLoco : MonoBehaviour
         //                             direction.y * velocity + playArea.transform.position.y,
         //                                                      playArea.transform.position.z );   /*direction.z * velocity + playArea.transform.position.z*/
 
-
         Vector3 newPos = new Vector3(0, 0, 0);
 
         playArea.gameObject.transform.position = newPos;
@@ -21,16 +20,10 @@ public class PanningLoco : MonoBehaviour
         Vector3 calculatedDirection = (locomotionController != null ? locomotionController.gameObject.transform.rotation : Quaternion.identity) * Vector3.forward;
 
         direction = calculatedDirection;
-
-        Debug.Log(direction);
     }
 
     void sticky()
-    {
-        velocity = Vector3.Distance(previousPos, currentPos) * sensitivity;
-
-        applyTranslation();
-    }
+    { velocity = Vector3.Distance(previousPos, currentPos) * sensitivity; applyTranslation(); }
     //----------------------------------------------------------------
 
     //Panning Function
