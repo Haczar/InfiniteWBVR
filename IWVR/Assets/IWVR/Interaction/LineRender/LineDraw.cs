@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine               ;
 using Valve.VR.InteractionSystem;
 
@@ -8,7 +7,7 @@ public class LineDraw : MonoBehaviour   //The classic way of doing line draw.
 {
     private void Start()
     {
-        lineRenObj = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/IWVR/Interaction/LineRenderObj.prefab");
+       // lineRenObj = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/IWVR/Interaction/LineRenderObj.prefab");
     }
 
     void Update()

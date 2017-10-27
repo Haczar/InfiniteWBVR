@@ -57,7 +57,7 @@ public class MarkerTip : MonoBehaviour
         Interactable closestInteractable = null;
 
         // Pick the closest hovering
-        float flHoverRadiusScale   = playerInstance.transform.lossyScale.x * 2.5f;
+        float flHoverRadiusScale   = playerInstance.transform.lossyScale.y * 2.315f;
         float flScaledSphereRadius = hoverSphereRadius * flHoverRadiusScale;
 
         // if we're close to the floor, increase the radius to make things easier to pick up

@@ -53,6 +53,15 @@ namespace IWVR
                     //transform.rotation = oldRotation;
                 }
             }
+            else if (hand.GetStandardInteractionButtonDown() || ((hand.controller != null) && hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_ApplicationMenu)))
+            {
+                Debug.Log("Its taking the menu button.");
+                Destroy(lineDump);
+                lineDump = new GameObject("LineDump");
+                lineDump.transform.SetParent(gameObject.transform);
+
+
+            }
         }
 
         //Marker Stuff
@@ -66,6 +75,8 @@ namespace IWVR
 
             currentLine.startWidth = width;
             currentLine.endWidth   = width;
+
+            currentLine.useWorldSpace = false;
 
             currentLine.material = (Material)Resources.Load("Materials/Marker/markerDefault.mat");
 
@@ -123,19 +134,26 @@ namespace IWVR
             {
                 currentLine.positionCount = index + 1;
 
-                currentLine.SetPosition(index, new Vector3(marker.transform.position.x, marker.transform.position.y, gameObject.GetComponent<BoxCollider>().transform.position.z - 0.01f));
-                //May need rotation for it to be properly latched to the board.
+                currentLine.SetPosition(index, this.transform.InverseTransformDirection(new Vector3(marker.transform.position.x, marker.transform.position.y, gameObject.GetComponent<BoxCollider>().transform.position.z - 0.01f)));
+
+                currentLine.transform.rotation = new Quaternion(0, -180f, 0, 1f);
 
                 index++;
             }
+
+            
         }
 
+        //Transform.getPositionLocalToGameObject(board, marker.transfrom.position.x, marker.transform.position.y, marker.transform.position.z);
 
         //Public
 
         //Part of Line Render
         public float width = 0.05f      ;
         public Color color = Color.black;
+
+
+        public GameObject lineDump;
 
 
         //Private
@@ -150,6 +168,8 @@ namespace IWVR
 
         private GameObject line      ;
         private GameObject lineRenObj;
+
+        
 
         private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & (~Hand.AttachmentFlags.SnapOnAttach) & (~Hand.AttachmentFlags.DetachOthers);
 

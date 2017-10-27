@@ -34,13 +34,13 @@ namespace IWVR
         // Update is called once per frame
         void Update()
         {
-            device = SteamVR_Controller.Input((int)hand.controller.index);
 
-            if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            if ((hand.controller != null) && hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_Grip))
             {
                 createBoard();
             }
         }
+
 
         public Hand hand;
 
