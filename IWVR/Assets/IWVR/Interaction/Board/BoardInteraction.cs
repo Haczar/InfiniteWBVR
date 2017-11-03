@@ -1,4 +1,4 @@
-﻿using UnityEngine               ;
+﻿    using UnityEngine               ;
 using Valve.VR.InteractionSystem;
 
 namespace IWVR
@@ -77,7 +77,7 @@ namespace IWVR
             currentLine.startWidth = width;
             currentLine.endWidth   = width;
 
-            currentLine.alignment          = LineAlignment  .View   ;
+            currentLine.alignment          = LineAlignment  .Local   ;
             currentLine.colorGradient.mode = GradientMode   .Fixed  ;
             currentLine.textureMode        = LineTextureMode.Stretch;
 
@@ -87,6 +87,15 @@ namespace IWVR
 
             currentLine.startColor = color;
             currentLine.endColor   = color;
+
+            
+
+            //scurrentLine.transform.localRotation = Quaternion.Euler(0, -180, 0);
+            currentLine.transform.localScale = new Vector3(0.125f, 0.5f, 99.95f);
+
+            //currentLine.transform.localPosition = new Vector3         (0     , -0.6479603f, 478.0002f);
+            currentLine.transform.SetPositionAndRotation(transform.localPosition, transform.localRotation);
+            //currentLine.transform.SetPositionAndRotation(new Vector3(-transform.localPosition.x, -transform.localPosition.y, -transform.localPosition.z), transform.rotation);
 
             index = 0;
 
@@ -162,13 +171,14 @@ namespace IWVR
 
                 currentLine.positionCount = index + 1;
 
-                currentLine.SetPosition(index, new Vector3(marker.transform.position.x, marker.transform.position.y, gameObject.transform.position.z - 0.01f));
-
+                //currentLine.SetPosition(index, new Vector3(marker.transform.position.x, marker.transform.position.y, gameObject.transform.position.z - 0.005f));
+                currentLine.SetPosition(index, currentLine.transform.InverseTransformVector(marker.transform.position));
+                //currentLine.transform.SetPositionAndRotation(transform.localPosition, transform.rotation);
                 index++;
 
-                currentLine.transform.localPosition = new Vector3         (0     , -0.6479603f, 478.0002f);
-                currentLine.transform.localRotation =     Quaternion.Euler(0     , -180       , 0        );
-                currentLine.transform.localScale    = new Vector3         (0.125f, 0.5f       , 99.95f   );
+                //currentLine.transform.localPosition = new Vector3         (0     , -0.6479603f, 478.0002f);
+                
+                
             }
         }
 

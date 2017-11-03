@@ -2,7 +2,7 @@
 <doc>
   <members>
     <assembly>
-      <name>UnityEditor.Timeline</name>
+      <name>UnityEngine.VR</name>
     </assembly>
   </members>
 </doc>

@@ -183,6 +183,8 @@ namespace Valve.VR.InteractionSystem
 
                     holdingBodies[i].AddForceAtPosition(attachForce * vdisplacement, targetPoint, ForceMode.Acceleration);
                     holdingBodies[i].AddForceAtPosition(-attachForceDamper * holdingBodies[i].GetPointVelocity(targetPoint), targetPoint, ForceMode.Acceleration);
+
+                    transform.localRotation = new Quaternion(90f, 90f, 180f, 1);
                 }
             }
         }
