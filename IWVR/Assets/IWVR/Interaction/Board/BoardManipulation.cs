@@ -22,7 +22,10 @@ namespace IWVR
             boardNum++;  newBoard = Instantiate(board);
 
             newBoard.transform.position = new Vector3(hand.transform.position.x, hand.transform.position.y, hand.transform.position.z + 1.5f);
-            newBoard.transform.rotation = hand.transform.rotation * Quaternion.AngleAxis(0, Vector3.right);
+
+            Util.FindOrAddComponent<FixedJoint>(newBoard);
+
+            newBoard.GetComponent<FixedJoint>().connectedBody = floor.GetComponent<Rigidbody>();
         }
 
         // Use this for initialization
@@ -34,7 +37,6 @@ namespace IWVR
         // Update is called once per frame
         void Update()
         {
-
             if ((hand.controller != null) && hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_Grip))
             {
                 createBoard();
@@ -43,6 +45,8 @@ namespace IWVR
 
 
         public Hand hand;
+
+        public GameObject floor;
 
         public GameObject board;
 
