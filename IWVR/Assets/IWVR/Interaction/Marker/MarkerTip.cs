@@ -58,7 +58,7 @@ public class MarkerTip : MonoBehaviour
 
         // Pick the closest hovering
         float flHoverRadiusScale   = playerInstance.transform.lossyScale.y * 2.315f;
-        float flScaledSphereRadius = hoverSphereRadius * flHoverRadiusScale;
+        float flScaledSphereRadius = hoverSphereRadius;
 
         // if we're close to the floor, increase the radius to make things easier to pick up
         float handDiff = Mathf.Abs(transform.position.y - playerInstance.trackingOriginTransform.position.y);
@@ -68,7 +68,7 @@ public class MarkerTip : MonoBehaviour
         for (int i = 0; i < overlappingColliders.Length; ++i)
             overlappingColliders[i] = null;
 
-        Physics.OverlapSphereNonAlloc(hoverSphereTransform.position - new Vector3(0, flScaledSphereRadius * boxMult - flScaledSphereRadius, 0),
+        Physics.OverlapSphereNonAlloc(hoverSphereTransform.position,
                                       flScaledSphereRadius                                                                                    ,
                                       overlappingColliders                                                                                    ,
                                       hoverLayerMask.value                                                                                     );

@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -77,17 +77,19 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -107,6 +109,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!23 &106514262 stripped
 MeshRenderer:
@@ -135,6 +139,8 @@ FixedJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!54 &143481796
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -212,6 +218,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1383864575807908, guid: 7819488ebc9f1c3429fe1fb2c15db48e, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7819488ebc9f1c3429fe1fb2c15db48e, type: 2}
   m_IsPrefabParent: 0
@@ -283,6 +293,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -298,6 +309,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -366,6 +378,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 138666078907865234, guid: 965ef8206bf7ed646a709ba3eba11c69,
+        type: 2}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 662794956}
     - target: {fileID: 114568574222960018, guid: 965ef8206bf7ed646a709ba3eba11c69,
         type: 2}
       propertyPath: hand
@@ -381,11 +398,6 @@ Prefab:
       propertyPath: floor
       value: 
       objectReference: {fileID: 662794952}
-    - target: {fileID: 138666078907865234, guid: 965ef8206bf7ed646a709ba3eba11c69,
-        type: 2}
-      propertyPath: m_ConnectedBody
-      value: 
-      objectReference: {fileID: 662794956}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 965ef8206bf7ed646a709ba3eba11c69, type: 2}
   m_IsPrefabParent: 0
@@ -454,7 +466,7 @@ Prefab:
     - target: {fileID: 114443081714595778, guid: e4c245a63ae0d3c4590259c63de0e3eb,
         type: 2}
       propertyPath: hoverSphereRadius
-      value: 0.04
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
       propertyPath: m_LocalScale.x
@@ -491,12 +503,53 @@ Prefab:
     - target: {fileID: 135239827229063950, guid: e4c245a63ae0d3c4590259c63de0e3eb,
         type: 2}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 136618340229239528, guid: e4c245a63ae0d3c4590259c63de0e3eb,
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514621742134030, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.14116511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514621742134030, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514621742134030, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807912009763734, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114443081714595778, guid: e4c245a63ae0d3c4590259c63de0e3eb,
+        type: 2}
+      propertyPath: hoverLayerMask.m_Bits
+      value: 32
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114158705256372922, guid: e4c245a63ae0d3c4590259c63de0e3eb, type: 2}
@@ -515,6 +568,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -530,6 +584,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -554,6 +609,8 @@ FixedJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!114 &957919734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +734,8 @@ FixedJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!54 &1190202623
 Rigidbody:
   m_ObjectHideFlags: 0
