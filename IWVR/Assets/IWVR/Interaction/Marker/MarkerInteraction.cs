@@ -9,7 +9,6 @@ namespace IWVR
         //-------------------------------------------------
         void Awake() { }
 
-
         //-------------------------------------------------
         // Called when a Hand starts hovering over this object
         //-------------------------------------------------
@@ -100,6 +99,10 @@ namespace IWVR
         //Transform.getPositionLocalToGameObject(board, marker.transfrom.position.x, marker.transform.position.y, marker.transform.position.z);
 
         //Public
+        public float width = 0.05f;
+
+        public Color color = Color.green;
+
 
         //Private
         private float attachTime;

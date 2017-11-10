@@ -1,4 +1,4 @@
-﻿    using UnityEngine               ;
+﻿using UnityEngine               ;
 using Valve.VR.InteractionSystem;
 
 namespace IWVR
@@ -57,16 +57,22 @@ namespace IWVR
             {
                 //Debug.Log("Clearing board.");
 
+                Transform lineDumpTrans = lineDump.transform;
+
                 Destroy(lineDump);
 
                 lineDump = new GameObject("LineDump");
 
                 lineDump.transform.SetParent(gameObject.transform);
+
+                lineDump.transform.localPosition = lineDumpTrans.localPosition;
+                lineDump.transform.localRotation = lineDumpTrans.localRotation;
+                lineDump.transform.localScale    = lineDumpTrans.localScale   ;
             }
         }
 
         //Marker Stuff
-        private void OnMarkerHoverBegin(MarkerTip marker)
+        private void OnMarkerHoverBegin(MarkerTip markerTip)
         {
             lineNum++; line = new GameObject(lineName + lineNum.ToString());//Increments the lineNum value and then creates a new line object with the lineName and lineNum to gen name.
 
@@ -74,8 +80,9 @@ namespace IWVR
 
             currentLine = line.gameObject.AddComponent<LineRenderer>();
 
-            currentLine.startWidth = width;
-            currentLine.endWidth   = width;
+            
+            currentLine.startWidth = marker.GetComponent<MarkerInteraction>().width;
+            currentLine.endWidth   = marker.GetComponent<MarkerInteraction>().width;
 
             currentLine.alignment          = LineAlignment  .Local   ;
             currentLine.colorGradient.mode = GradientMode   .Fixed  ;
@@ -85,19 +92,19 @@ namespace IWVR
 
             currentLine.material.shader = Shader.Find("Sprites/Default");
 
-            currentLine.startColor = color;
-            currentLine.endColor   = color;
+            currentLine.startColor = marker.GetComponent<MarkerInteraction>().color;
+            currentLine.endColor   = marker.GetComponent<MarkerInteraction>().color;
 
             currentLine.transform.localScale = new Vector3(0.125f, 0.5f, 99.95f);
 
-            currentLine.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            currentLine.transform.localRotation = Quaternion.Euler(0, 0, 0);
             currentLine.transform.localPosition = Vector3.zero;
 
             index = 0;
 
             lineActive = true;
 
-            this.marker = marker;
+            this.markerTip = markerTip;
 
             Debug.Log(currentLine.material);
         }
@@ -107,6 +114,12 @@ namespace IWVR
         private void OnMarkerHoverEnd(MarkerTip marker)
         {
             lineActive = false;
+
+            lineCollider = line.gameObject.AddComponent<BoxCollider>();
+
+            line.AddComponent<LineInteraction>();
+
+            line.AddComponent<EraserHoverInteraction>();
         }
 
         //-------------------------------------------------
@@ -157,25 +170,19 @@ namespace IWVR
         {
             if (lineActive)
             {
-                Quaternion temp;
-
-                temp = Quaternion.Euler(gameObject.transform.rotation.eulerAngles.x - oriRotation.eulerAngles.x, 
-                                        gameObject.transform.rotation.eulerAngles.y - oriRotation.eulerAngles.y, 
-                                        gameObject.transform.rotation.eulerAngles.z - oriRotation.eulerAngles.z );
-
-                Debug.Log("Temp: " + temp.eulerAngles);
-
                 currentLine.positionCount = index + 1;
 
                 Vector3 worldMarkerPos = marker.transform.position;
+
                 Vector3 localMarkerPos = currentLine.transform.InverseTransformPoint(worldMarkerPos);
 
-                Vector3 clippedZPos = new Vector3(localMarkerPos.x, localMarkerPos.y, -0.005f);
+                Vector3 clippedZPos = new Vector3(localMarkerPos.x, localMarkerPos.y, -0.00759f);
 
                 currentLine.SetPosition(index, clippedZPos);
+
+                //lineCollider.sharedMesh.
+
                 index++;
-                
-                
             }
         }
 
@@ -184,13 +191,9 @@ namespace IWVR
         //Public
 
         //Part of Line Render
-        public float width = 0.05f    ;
-        public Color color = Color.green;
-
-        public GameObject floor;
-
+        public GameObject floor   ;
         public GameObject lineDump;
-
+        public GameObject marker  ;
 
         //Private
         private bool lineActive;
@@ -202,18 +205,18 @@ namespace IWVR
 
         private string lineName = "Line ";  //Part of Line Naming scheme.
 
-        private GameObject line      ;
-        private GameObject lineRenObj;
+        private BoxCollider lineCollider;
 
-        private Quaternion oriRotation;
-       
+        private GameObject line;
+
         private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & (~Hand.AttachmentFlags.SnapOnAttach) & (~Hand.AttachmentFlags.DetachOthers);
 
         private LineRenderer currentLine;
 
-        private MarkerTip marker;
+        private MarkerTip markerTip;
 
         private Quaternion oldRotation;
+        private Quaternion oriRotation;
 
         private Vector3 oldPosition;
     }
