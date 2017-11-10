@@ -21,7 +21,9 @@ namespace IWVR
         {
             boardNum++;  newBoard = Instantiate(board);
 
-            newBoard.transform.position = new Vector3(hand.transform.position.x, hand.transform.position.y, hand.transform.position.z + 1.5f);
+            newBoard.transform.position = new Vector3(hand.transform.forward.x, hand.transform.forward.y, hand.transform.forward.z) + new Vector3(hand.transform.position.x, hand.transform.position.y, hand.transform.position.z);
+
+            newBoard.transform.rotation = Quaternion.Euler(0, hand.transform.rotation.eulerAngles.y, 0);
 
             Util.FindOrAddComponent<FixedJoint>(newBoard);
 
