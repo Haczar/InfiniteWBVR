@@ -71,57 +71,6 @@ namespace IWVR
             }
         }
 
-        //Marker Stuff
-        private void OnMarkerHoverBegin(MarkerTip markerTip)
-        {
-            lineNum++; line = new GameObject(lineName + lineNum.ToString());//Increments the lineNum value and then creates a new line object with the lineName and lineNum to gen name.
-
-            line.transform.SetParent(gameObject.transform.Find("LineDump").transform);
-
-            currentLine = line.gameObject.AddComponent<LineRenderer>();
-
-            
-            currentLine.startWidth = marker.GetComponent<MarkerInteraction>().width;
-            currentLine.endWidth   = marker.GetComponent<MarkerInteraction>().width;
-
-            currentLine.alignment          = LineAlignment  .Local   ;
-            currentLine.colorGradient.mode = GradientMode   .Fixed  ;
-            currentLine.textureMode        = LineTextureMode.Stretch;
-
-            currentLine.useWorldSpace = false;
-
-            currentLine.material.shader = Shader.Find("Sprites/Default");
-
-            currentLine.startColor = marker.GetComponent<MarkerInteraction>().color;
-            currentLine.endColor   = marker.GetComponent<MarkerInteraction>().color;
-
-            currentLine.transform.localScale = new Vector3(0.125f, 0.5f, 99.95f);
-
-            currentLine.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            currentLine.transform.localPosition = Vector3.zero;
-
-            index = 0;
-
-            lineActive = true;
-
-            this.markerTip = markerTip;
-
-            Debug.Log(currentLine.material);
-        }
-
-        private void OnMarkerHoverUpdate(MarkerTip marker) { }
-
-        private void OnMarkerHoverEnd(MarkerTip marker)
-        {
-            lineActive = false;
-
-            lineCollider = line.gameObject.AddComponent<BoxCollider>();
-
-            line.AddComponent<LineInteraction>();
-
-            line.AddComponent<EraserHoverInteraction>();
-        }
-
         //-------------------------------------------------
         // Called when this GameObject becomes attached to the hand
         //-------------------------------------------------
@@ -168,6 +117,50 @@ namespace IWVR
 
         void Update()
         {
+            
+        }
+
+        //Marker Stuff
+        public void OnMarkerHoverBegin(MarkerTip markerTip)
+        {
+            lineNum++; line = new GameObject(lineName + lineNum.ToString());//Increments the lineNum value and then creates a new line object with the lineName and lineNum to gen name.
+
+            line.transform.SetParent(gameObject.transform.Find("LineDump").transform);
+
+            currentLine = line.gameObject.AddComponent<LineRenderer>();
+
+
+            currentLine.startWidth = marker.GetComponent<MarkerInteraction>().width;
+            currentLine.endWidth = marker.GetComponent<MarkerInteraction>().width;
+
+            currentLine.alignment = LineAlignment.Local;
+            currentLine.colorGradient.mode = GradientMode.Fixed;
+            currentLine.textureMode = LineTextureMode.Stretch;
+            currentLine.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
+
+            currentLine.useWorldSpace = false;
+
+            currentLine.material.shader = Shader.Find("Sprites/Default");
+
+            currentLine.startColor = marker.GetComponent<MarkerInteraction>().color;
+            currentLine.endColor = marker.GetComponent<MarkerInteraction>().color;
+
+            currentLine.transform.localScale = new Vector3(0.125f, 0.5f, 99.95f);
+
+            currentLine.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            currentLine.transform.localPosition = Vector3.zero;
+
+            index = 0;
+
+            lineActive = true;
+
+            this.markerTip = markerTip;
+
+            Debug.Log(currentLine.material);
+        }
+
+        public void OnMarkerHoverUpdate(MarkerTip marker)
+        {
             if (lineActive)
             {
                 currentLine.positionCount = index + 1;
@@ -185,6 +178,18 @@ namespace IWVR
                 index++;
             }
         }
+
+        public void OnMarkerHoverEnd(MarkerTip marker)
+        {
+            lineActive = false;
+
+            lineCollider = line.gameObject.AddComponent<MeshCollider>();
+
+            line.AddComponent<LineInteraction>();
+
+            line.AddComponent<EraserHoverInteraction>();
+        }
+
 
         //Transform.getPositionLocalToGameObject(board, marker.transfrom.position.x, marker.transform.position.y, marker.transform.position.z);
 
@@ -205,7 +210,7 @@ namespace IWVR
 
         private string lineName = "Line ";  //Part of Line Naming scheme.
 
-        private BoxCollider lineCollider;
+        private MeshCollider lineCollider;
 
         private GameObject line;
 
