@@ -134,9 +134,9 @@ namespace IWVR
             currentLine.endWidth = marker.GetComponent<MarkerInteraction>().width;
 
             currentLine.alignment = LineAlignment.Local;
-            currentLine.colorGradient.mode = GradientMode.Fixed;
-            currentLine.textureMode = LineTextureMode.Stretch;
-            currentLine.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
+            //currentLine.colorGradient.mode = GradientMode.Fixed;
+            //currentLine.textureMode = LineTextureMode.Stretch;
+            //currentLine.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
 
             currentLine.useWorldSpace = false;
 
@@ -204,8 +204,6 @@ namespace IWVR
 
         }
 
-
-        //Transform.getPositionLocalToGameObject(board, marker.transfrom.position.x, marker.transform.position.y, marker.transform.position.z);
 
         //Public
 

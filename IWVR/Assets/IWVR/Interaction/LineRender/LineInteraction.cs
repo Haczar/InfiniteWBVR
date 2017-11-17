@@ -9,7 +9,6 @@ public class LineInteraction : MonoBehaviour
         EraseSide es = other.gameObject.GetComponent<EraseSide>();
         if (es != null)
         {
-            Debug.Log("Attempting to Erase Line...");
             Destroy(gameObject);
         }
     }
@@ -23,7 +22,6 @@ public class LineInteraction : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Line Created");
         Rigidbody r = Util.FindOrAddComponent<Rigidbody>(this.gameObject);
         r.useGravity = false;
         r.isKinematic = true;
