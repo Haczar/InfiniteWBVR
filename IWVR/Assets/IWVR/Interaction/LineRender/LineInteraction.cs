@@ -1,35 +1,32 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-[RequireComponent(typeof(Interactable))]
 public class LineInteraction : MonoBehaviour
 {
     //Eraser Hover Interactions
-    private void OnEraserHoverBegin(EraseSide eraseSide)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Attempting to Erase Line...");
-
-        Destroy(gameObject);
+        EraseSide es = other.gameObject.GetComponent<EraseSide>();
+        if (es != null)
+        {
+            Debug.Log("Attempting to Erase Line...");
+            Destroy(gameObject);
+        }
     }
 
-    private void OnEraserHoverEnd(EraseSide eraseSide)
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    Debug.Log("Attempting to Erase Line...");
+
+    //    Destroy(gameObject);
+    //}
+
+    private void Awake()
     {
-        Debug.Log("Attempting to Erase Line...");
-
-        Destroy(gameObject);
+        Debug.Log("Line Created");
+        Rigidbody r = Util.FindOrAddComponent<Rigidbody>(this.gameObject);
+        r.useGravity = false;
+        r.isKinematic = true;
+        
     }
-
-
-    //Regs
-    void Awake() { }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

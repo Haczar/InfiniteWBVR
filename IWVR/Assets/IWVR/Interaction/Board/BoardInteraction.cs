@@ -150,13 +150,14 @@ namespace IWVR
             currentLine.transform.localRotation = Quaternion.Euler(0, 0, 0);
             currentLine.transform.localPosition = Vector3.zero;
 
+            currentLine.gameObject.AddComponent<LineInteraction>();
+
             index = 0;
 
             lineActive = true;
 
             this.markerTip = markerTip;
-
-            Debug.Log(currentLine.material);
+            
         }
 
         public void OnMarkerHoverUpdate(MarkerTip marker)
@@ -182,12 +183,25 @@ namespace IWVR
         public void OnMarkerHoverEnd(MarkerTip marker)
         {
             lineActive = false;
+            currentLine.numCornerVertices = 0;
 
-            lineCollider = line.gameObject.AddComponent<MeshCollider>();
+            Vector3 oldPos = currentLine.GetPosition(0);
+            for(int i=1; i<currentLine.positionCount; i++)
+            {
+                Vector3 newPos = currentLine.GetPosition(i);
+                BoxCollider bc = currentLine.gameObject.AddComponent<BoxCollider>();
+                bc.isTrigger = true;
+                Vector3 size = newPos - oldPos;
+                size.x = Mathf.Abs(size.x);
+                size.y = Mathf.Abs(size.y);
+                size.z = 0.00759f;
+                bc.size = size;
+                Vector3 c = oldPos + new Vector3(0, 0, -0.02f);
+                bc.center = c;
+                
+                oldPos = newPos;
+            }
 
-            line.AddComponent<LineInteraction>();
-
-            line.AddComponent<EraserHoverInteraction>();
         }
 
 
