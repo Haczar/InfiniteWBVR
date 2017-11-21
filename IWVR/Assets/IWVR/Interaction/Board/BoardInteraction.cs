@@ -67,7 +67,40 @@ namespace IWVR
 
                 lineDump.transform.localPosition = lineDumpTrans.localPosition;
                 lineDump.transform.localRotation = lineDumpTrans.localRotation;
-                lineDump.transform.localScale    = lineDumpTrans.localScale   ;
+                lineDump.transform.localScale = lineDumpTrans.localScale;
+            }
+            else if ((hand.controller != null) && hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad))
+            {
+                if (   hand.controller.GetState().rAxis0.x >  0.25f 
+                    && hand.controller.GetState().rAxis0.y <  0.15f 
+                    && hand.controller.GetState().rAxis0.y > -0.15f)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x + 0.25f, transform.localScale.y, transform.localScale.z);
+                }
+                else if (  hand.controller.GetState().rAxis0.x  < -0.25f 
+                         && hand.controller.GetState().rAxis0.y <  0.15f 
+                         && hand.controller.GetState().rAxis0.y > -0.15f)
+                {
+                    if (transform.localScale.x > 0.3f)
+                    {
+                        transform.localScale = new Vector3(transform.localScale.x - 0.25f, transform.localScale.y, transform.localScale.z);
+                    }
+                }
+                else if (   hand.controller.GetState().rAxis0.y >  0.25f
+                         && hand.controller.GetState().rAxis0.x > -0.15f
+                         && hand.controller.GetState().rAxis0.x <  0.25f)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + 0.25f, transform.localScale.z);
+                }
+                else if (   hand.controller.GetState().rAxis0.y < -0.25f
+                         && hand.controller.GetState().rAxis0.x > -0.15f
+                         && hand.controller.GetState().rAxis0.x <  0.15f)
+                {
+                    if (transform.localScale.y > 0.3f)
+                    {
+                        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - 0.25f, transform.localScale.z);
+                    }
+                }
             }
         }
 
@@ -133,10 +166,10 @@ namespace IWVR
             currentLine.startWidth = marker.GetComponent<MarkerInteraction>().width;
             currentLine.endWidth = marker.GetComponent<MarkerInteraction>().width;
 
-            currentLine.alignment = LineAlignment.Local;
-            //currentLine.colorGradient.mode = GradientMode.Fixed;
-            //currentLine.textureMode = LineTextureMode.Stretch;
-            //currentLine.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
+            currentLine.alignment          = LineAlignment.Local;
+            currentLine.colorGradient.mode = GradientMode .Fixed;
+            currentLine.textureMode = LineTextureMode.Stretch;
+            currentLine.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
 
             currentLine.useWorldSpace = false;
 
@@ -174,8 +207,6 @@ namespace IWVR
 
                 currentLine.SetPosition(index, clippedZPos);
 
-                //lineCollider.sharedMesh.
-
                 index++;
             }
         }
@@ -189,14 +220,22 @@ namespace IWVR
             for(int i=1; i<currentLine.positionCount; i++)
             {
                 Vector3 newPos = currentLine.GetPosition(i);
+
                 BoxCollider bc = currentLine.gameObject.AddComponent<BoxCollider>();
+
                 bc.isTrigger = true;
+
                 Vector3 size = newPos - oldPos;
+
                 size.x = Mathf.Abs(size.x);
                 size.y = Mathf.Abs(size.y);
+
                 size.z = 0.00759f;
+
                 bc.size = size;
+
                 Vector3 c = oldPos + new Vector3(0, 0, -0.02f);
+
                 bc.center = c;
                 
                 oldPos = newPos;

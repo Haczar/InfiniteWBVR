@@ -95,6 +95,11 @@ namespace IWVR
         //-------------------------------------------------
         private void OnHandFocusLost(Hand hand) { }
 
+        public void changeMarkerSize(float something)
+        {
+            width = something;
+        }
+
 
         //Transform.getPositionLocalToGameObject(board, marker.transfrom.position.x, marker.transform.position.y, marker.transform.position.z);
 
