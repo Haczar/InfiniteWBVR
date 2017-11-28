@@ -1,0 +1,50 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace IWVR
+{
+    public class Docked : MonoBehaviour
+    {
+        public void giveStuff(GameObject dockedBoard, GameObject leftController, GameObject rightController)
+        {
+            this.dockedBoard = dockedBoard;
+
+            this.leftController = leftController;
+            this.rightController = rightController;
+        }
+
+        public void clean()  //Destory's state related componenets
+        {
+            Destroy(this.gameObject.GetComponent<Docked>());
+        }
+
+        // Use this for initialization
+        void Start()
+        {
+            leftController.AddComponent<PanningLoco>().active = true;
+            rightController.AddComponent<LineDraw>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (leftController.GetComponent<SteamVR_TrackedController>().gripped)
+            {
+                UserState.PlayerStuff stuff;
+
+                stuff.leftHand = leftController;
+                stuff.rightHand = rightController;
+
+                //this.gameObject.GetComponentInParent<UserState>().OnFreeStateActivated(stuff);
+            }
+        }
+
+        private GameObject dockedBoard;
+
+        private GameObject leftController;
+        private GameObject rightController;
+
+        private Vector3 position;
+    }
+}

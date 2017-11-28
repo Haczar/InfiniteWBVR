@@ -89,7 +89,7 @@ namespace Valve.VR.InteractionSystem
 
 		private GameObject applicationLostFocusObject;
 
-		SteamVR_Events.Action inputFocusAction;
+		SteamVR_Events.Action inputFocusAction; //BRB EATING>......
 
 
 		//-------------------------------------------------
