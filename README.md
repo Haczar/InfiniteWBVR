@@ -8,11 +8,9 @@ We will be using Unity 2017.1.1f1 so make sure you use the same version!
 Authors:
 - Haczar Criollo
 - Matthew Kress
-- Carlos Debasa
 - Edward Gonzalez
 - Elias Garcia
 - Ciana Rogers
 - Andres Salinas
-- Rafael Leal
 - Matthew Garcia
 
